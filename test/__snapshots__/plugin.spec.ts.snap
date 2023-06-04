@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shim should be able to transform commonJs to ESM 1`] = `
+"// dist/shims/esm.mjs
+import { fileURLToPath } from "url";
+import path from "path";
+var getFilename = () => fileURLToPath(import.meta.url);
+var getDirname = () => path.dirname(getFilename());
+var __dirname = /* @__PURE__ */ getDirname();
+var __filename = /* @__PURE__ */ getFilename();
+
+// test/fixtures/cjs.js
+console.log(__filename);
+console.log(__dirname);
+"
+`;
+
+exports[`shim should be able to transform esm to commonJs 1`] = `
+"// dist/shims/cjs.js
+var getImportMetaUrl = () => require("url").pathToFileURL(__filename).toString();
+var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
+
+// test/fixtures/esm.mjs
+var import_path = require("path");
+var import_url = require("url");
+var __dirname = (0, import_path.dirname)((0, import_url.fileURLToPath)(importMetaUrl));
+console.log(__dirname);
+"
+`;

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "ES2022",
+        "outDir": "dist",
+        "declaration": true,
+        "rootDir": "src"
+    },
+    "exclude": ["./build", "./test"]
+}
