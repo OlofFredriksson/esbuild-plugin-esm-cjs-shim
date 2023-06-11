@@ -1,6 +1,6 @@
 {
   "name": "esbuild-plugin-esm-cjs-shim",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "",
   "keywords": [],
   "homepage": "https://github.com/OlofFredriksson/esbuild-plugin-esm-cjs-shim#readme",
