@@ -2,12 +2,11 @@ import esbuild from "esbuild";
 import { shimPlugin } from "../dist/esm/plugin.js";
 
 const defaultConfig = {
-    entryPoints: ["./test/fixtures/cjs.js"],
+    entryPoints: ["./test/fixtures/vanill.js"],
     bundle: true,
     write: false,
     format: "esm",
     plugins: [shimPlugin()],
-    external: ["require"],
     platform: "node",
     logLevel: "silent",
 };

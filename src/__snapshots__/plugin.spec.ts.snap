@@ -1,24 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`shim should be able to transform commonJs to ESM 1`] = `
+exports[`shim CJS -> ESM should be able to shim __dirname & __filename 1`] = `
 "// shims/esm.mjs
 import { fileURLToPath } from "url";
 import path from "path";
-import { createRequire } from "node:module";
 var getFilename = () => fileURLToPath(import.meta.url);
 var getDirname = () => path.dirname(getFilename());
 var __dirname = /* @__PURE__ */ getDirname();
 var __filename = /* @__PURE__ */ getFilename();
-var shimRequire = /* @__PURE__ */ createRequire(import.meta.url);
 
-// test/fixtures/cjs.js
+// test/fixtures/dirname-filename.js
 console.log(__filename);
 console.log(__dirname);
-shimRequire.resolve("./cjs.js");
 "
 `;
 
-exports[`shim should be able to transform esm to commonJs 1`] = `
+exports[`shim CJS -> ESM should be able to shim require 1`] = `
+"// shims/esm.mjs
+import { createRequire } from "node:module";
+var getRequire = () => createRequire(import.meta.url);
+var shimRequire = /* @__PURE__ */ getRequire();
+
+// test/fixtures/require.resolve.js
+console.log(shimRequire.resolve(".foo"));
+"
+`;
+
+exports[`shim ESM -> CJS should be able to shim import.meta.url 1`] = `
 ""use strict";
 
 // shims/cjs.js
