@@ -2,6 +2,8 @@
 
 Shims ESM and CJS features, handy if you are building hybrid NPM modules.
 
+[![Build](https://github.com/OlofFredriksson/esbuild-plugin-esm-cjs-shim/workflows/Build/badge.svg)](https://github.com/OlofFredriksson/sitevision-mock/actions) [![npm](https://img.shields.io/npm/v/esbuild-plugin-esm-cjs-shim)](https://www.npmjs.com/package/esbuild-plugin-esm-cjs-shim)
+
 ## Features
 
 Shims when building ESM:
