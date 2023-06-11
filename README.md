@@ -12,6 +12,7 @@ Shims when building ESM:
 Shims when building CJS:
 
 -   import.meta.url
+-   require (require.resolve)
 
 ### Getting Started
 
@@ -20,7 +21,7 @@ Shims when building CJS:
 Load plugin
 
 ```javascript
-const { shimPlugin } = require("esbuild-plugin-esm-cjs-shim";
+const { shimPlugin } = require("esbuild-plugin-esm-cjs-shim)";
 ```
 
 or if ESM:
@@ -36,12 +37,16 @@ Add following to your esbuild-conf:
     entryPoints: ["./commonjs.entry.js"],
     bundle: true,
     write: false,
-+    plugins: [shimPlugin],
++    plugins: [shimPlugin()],
 +    format: "esm", // or "cjs" depending on what you need to build
 +    platform: "node",
 };
 
 ```
+
+### Known issues
+
+-   All shims are included at this point.
 
 ### Credits
 

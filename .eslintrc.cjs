@@ -1,27 +1,36 @@
-/* eslint-env node */
+require("@html-validate/eslint-config/patch/modern-module-resolution");
+
 module.exports = {
-    extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-    parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
     root: true,
+    extends: ["@html-validate"],
+
+    rules: {
+        "import/extensions": "off",
+        "no-console": "off",
+    },
+
     overrides: [
         {
-            files: "*.spec.ts",
-            env: {
-                jest: true,
-            },
-            plugins: ["jest"],
+            files: ["*.cjs", "*.mjs"],
+        },
+        {
+            files: "**/*.ts",
+            extends: ["@html-validate/typescript"],
+        },
+        {
+            files: "*.spec.[jt]s",
+            extends: ["@html-validate/jest"],
             rules: {
-                "jest/no-disabled-tests": "warn",
-                "jest/no-focused-tests": "warn",
-                "jest/no-identical-title": "error",
-                "jest/no-test-prefixes": "warn",
-                "jest/prefer-to-have-length": "error",
-                "jest/prefer-to-be": "error",
-                "jest/valid-describe-callback": "error",
-                "jest/valid-expect": "error",
-                "jest/valid-expect-in-promise": "error",
+                "jest/prefer-expect-assertions": "off",
             },
+        },
+        {
+            files: ["src/**/*.ts"],
+            parserOptions: {
+                tsconfigRootDir: __dirname,
+                project: ["./tsconfig.json"],
+            },
+            extends: ["@html-validate/typescript-typeinfo"],
         },
     ],
 };

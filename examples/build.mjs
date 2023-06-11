@@ -6,7 +6,8 @@ const defaultConfig = {
     bundle: true,
     write: false,
     format: "esm",
-    plugins: [shimPlugin],
+    plugins: [shimPlugin()],
+    external: ["require"],
     platform: "node",
     logLevel: "silent",
 };

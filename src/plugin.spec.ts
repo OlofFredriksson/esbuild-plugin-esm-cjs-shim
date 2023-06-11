@@ -1,16 +1,17 @@
-import esbuild from "esbuild";
-import { shimPlugin } from "../dist/cjs/plugin.js";
-const defaultConfig = {
+import { build, type BuildOptions } from "esbuild";
+import { shimPlugin } from "./plugin";
+
+const defaultConfig: BuildOptions = {
     entryPoints: ["./test/fixtures/cjs.js"],
     bundle: true,
     write: false,
-    plugins: [shimPlugin],
+    plugins: [shimPlugin()],
     platform: "node",
     logLevel: "silent",
 };
 
 describe("shim", () => {
-    let config;
+    let config: BuildOptions;
     beforeEach(() => {
         config = defaultConfig;
     });
@@ -21,7 +22,7 @@ describe("shim", () => {
             entryPoints: ["./test/fixtures/cjs.js"],
         };
 
-        await expect(esbuild.build(config)).rejects.toThrow(Error);
+        await expect(build(config)).rejects.toThrow(Error);
     });
 
     it("should be able to transform commonJs to ESM", async () => {
@@ -30,8 +31,8 @@ describe("shim", () => {
             entryPoints: ["./test/fixtures/cjs.js"],
             format: "esm",
         };
-        const result = await esbuild.build(config);
-        expect(result.outputFiles[0].text).toMatchSnapshot();
+        const result = await build(config);
+        expect(result.outputFiles?.[0].text).toMatchSnapshot();
     });
 
     it("should be able to transform esm to commonJs", async () => {
@@ -40,7 +41,7 @@ describe("shim", () => {
             entryPoints: ["./test/fixtures/esm.mjs"],
             format: "cjs",
         };
-        const result = await esbuild.build(config);
-        expect(result.outputFiles[0].text).toMatchSnapshot();
+        const result = await build(config);
+        expect(result.outputFiles?.[0].text).toMatchSnapshot();
     });
 });

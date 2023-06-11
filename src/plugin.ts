@@ -1,7 +1,7 @@
-import { PluginBuild } from "esbuild";
+import { type PluginBuild, type Plugin } from "esbuild";
 
-export const shimPlugin = {
-    name: "shim",
+export const shimPlugin = (): Plugin => ({
+    name: "shimPlugin",
     setup(build: PluginBuild) {
         const options = build.initialOptions;
 
@@ -12,6 +12,12 @@ export const shimPlugin = {
         }
         if (options.format === "esm") {
             options.inject = [`${__dirname}/../shims/esm.mjs`];
+            options.define = {
+                ...options.define,
+                ...{
+                    require: "shimRequire",
+                },
+            };
         }
 
         if (options.format === "cjs") {
@@ -24,4 +30,4 @@ export const shimPlugin = {
             };
         }
     },
-};
+});

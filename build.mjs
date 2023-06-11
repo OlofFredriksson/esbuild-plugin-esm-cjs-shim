@@ -6,7 +6,7 @@ fs.copySync("src", "build");
 
 fs.renameSync("build/plugin.ts", "build/plugin.cjs.ts");
 
-const shim = fs.readFileSync("./build/shims/esm.mjs");
+const shim = fs.readFileSync("./shims/esm.mjs");
 let file = fs.readFileSync("./build/plugin.cjs.ts");
 
 file = `
@@ -28,7 +28,6 @@ for (const format of formats) {
 
 fs.writeJSONSync("./dist/esm/package.json", { type: "module" });
 fs.ensureDirSync("./dist/shims");
-fs.copyFileSync("./src/shims/cjs.js", "./dist/shims/cjs.js");
-fs.copyFileSync("./src/shims/esm.mjs", "./dist/shims/esm.mjs");
+fs.copySync("./shims/", "./dist/shims");
 
 fs.removeSync("./build");

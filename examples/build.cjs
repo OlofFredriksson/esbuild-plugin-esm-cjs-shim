@@ -1,12 +1,12 @@
 const esbuild = require("esbuild");
-const { shimPlugin } = require("../dist/cjs/plugin.js");
+const { shimPlugin } = require("../dist/cjs/plugin.ts");
 
 const defaultConfig = {
     entryPoints: ["./test/fixtures/cjs.js"],
     bundle: true,
     write: false,
     format: "esm",
-    plugins: [shimPlugin],
+    plugins: [shimPlugin()],
     platform: "node",
     logLevel: "silent",
 };
