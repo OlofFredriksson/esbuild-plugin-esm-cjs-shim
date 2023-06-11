@@ -8,11 +8,11 @@ Shims when building ESM:
 
 -   \_\_filename
 -   \_\_dirname
+-   require (require.resolve)
 
 Shims when building CJS:
 
 -   import.meta.url
--   require (require.resolve)
 
 ### Getting Started
 
